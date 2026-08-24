@@ -27,23 +27,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: () {},
             ),
             const _SettingsSectionLabel('Appearance'),
-            RadioListTile<ThemeMode>(
-              title: const Text('System default'),
-              value: ThemeMode.system,
+            RadioGroup<ThemeMode>(
               groupValue: _themeMode,
               onChanged: (v) => setState(() => _themeMode = v!),
-            ),
-            RadioListTile<ThemeMode>(
-              title: const Text('Light'),
-              value: ThemeMode.light,
-              groupValue: _themeMode,
-              onChanged: (v) => setState(() => _themeMode = v!),
-            ),
-            RadioListTile<ThemeMode>(
-              title: const Text('Dark'),
-              value: ThemeMode.dark,
-              groupValue: _themeMode,
-              onChanged: (v) => setState(() => _themeMode = v!),
+              child: const Column(
+                children: [
+                  RadioListTile<ThemeMode>(
+                    title: Text('System default'),
+                    value: ThemeMode.system,
+                  ),
+                  RadioListTile<ThemeMode>(
+                    title: Text('Light'),
+                    value: ThemeMode.light,
+                  ),
+                  RadioListTile<ThemeMode>(
+                    title: Text('Dark'),
+                    value: ThemeMode.dark,
+                  ),
+                ],
+              ),
             ),
             const _SettingsSectionLabel('Transfers'),
             SwitchListTile(

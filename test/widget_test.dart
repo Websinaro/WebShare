@@ -1,6 +1,5 @@
 // Basic smoke test: the app boots and shows the Home screen's primary actions.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 

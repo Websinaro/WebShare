@@ -11,7 +11,6 @@ import 'transfer_engine.dart';
 /// the real implementation requires no changes above this file.
 class MockTransferEngine implements TransferEngine {
   final _rand = Random();
-  StreamController<TransferProgress>? _controller;
   bool _cancelled = false;
   bool _paused = false;
 
@@ -47,7 +46,6 @@ class MockTransferEngine implements TransferEngine {
     _cancelled = false;
     _paused = false;
     final controller = StreamController<TransferProgress>();
-    _controller = controller;
 
     const totalBytes = 250 * 1024 * 1024;
     var transferred = 0;

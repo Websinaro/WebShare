@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/providers/service_providers.dart';
+import '../../../models/transfer_session.dart';
 import '../../../services/transfer/transfer_engine.dart';
 import '../../send/presentation/widgets/selected_file_tile.dart';
 
