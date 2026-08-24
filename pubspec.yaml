@@ -1,0 +1,40 @@
+name: webshare
+description: "WebShare — fast, direct Android-to-Android file transfer."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # State management
+  flutter_riverpod: ^2.5.1
+
+  # Navigation
+  go_router: ^14.2.0
+
+  # QR generation + scanning
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^5.2.3
+
+  # File picking
+  file_picker: ^8.1.2
+  path_provider: ^2.1.4
+
+  # Permissions (camera, storage/media, nearby wifi)
+  permission_handler: ^11.3.1
+
+  # Formatting (file sizes, dates)
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
