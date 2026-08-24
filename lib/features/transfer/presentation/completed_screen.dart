@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/theme/app_gradients.dart';
 import '../../../services/transfer/transfer_engine.dart';
 import '../../send/presentation/widgets/selected_file_tile.dart';
 
@@ -47,8 +48,8 @@ class _CompletedScreenState extends State<CompletedScreen> with SingleTickerProv
                 scale: _scale,
                 child: Container(
                   padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(color: scheme.primaryContainer, shape: BoxShape.circle),
-                  child: Icon(Icons.check_rounded, size: 56, color: scheme.onPrimaryContainer),
+                  decoration: const BoxDecoration(gradient: AppGradients.success, shape: BoxShape.circle),
+                  child: const Icon(Icons.check_rounded, size: 56, color: Colors.white),
                 ),
               ),
               const SizedBox(height: 24),

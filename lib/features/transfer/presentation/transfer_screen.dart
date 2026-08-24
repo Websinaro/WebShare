@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/providers/service_providers.dart';
+import '../../../core/theme/app_gradients.dart';
+import '../../../core/widgets/gradient_progress_ring.dart';
 import '../../../models/transfer_session.dart';
 import '../../../services/transfer/transfer_engine.dart';
 import '../../send/presentation/widgets/selected_file_tile.dart';
@@ -96,10 +98,12 @@ class _TransferScreenState extends ConsumerState<TransferScreen> {
                               tween: Tween(begin: 0, end: p.fraction),
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeOut,
-                              builder: (context, value, _) => CircularProgressIndicator(
-                                value: value,
+                              builder: (context, value, _) => GradientProgressRing(
+                                progress: value,
                                 strokeWidth: 10,
-                                strokeCap: StrokeCap.round,
+                                gradient: widget.args.role == TransferRole.sender
+                                    ? AppGradients.primary
+                                    : AppGradients.receive,
                               ),
                             ),
                             Column(

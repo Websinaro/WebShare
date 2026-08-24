@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/theme/app_gradients.dart';
 import '../../../core/widgets/fade_slide_in.dart';
 import '../../../core/widgets/primary_action_button.dart';
 import 'widgets/recent_transfers_section.dart';
@@ -31,6 +32,7 @@ class HomeScreen extends StatelessWidget {
                 label: 'Send',
                 subtitle: 'Pick files and share them nearby',
                 onTap: () => context.push('/send'),
+                gradient: AppGradients.primary,
               ),
             ),
             const SizedBox(height: 16),
@@ -41,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                 label: 'Receive',
                 subtitle: 'Scan a code to get files',
                 onTap: () => context.push('/receive'),
-                backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                gradient: AppGradients.receive,
               ),
             ),
             const SizedBox(height: 32),
@@ -52,3 +54,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+

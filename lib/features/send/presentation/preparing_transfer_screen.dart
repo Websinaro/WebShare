@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../core/providers/service_providers.dart';
+import '../../../core/theme/app_gradients.dart';
+import '../../../core/widgets/flowing_gradient_surface.dart';
+import '../../../core/widgets/radar_pulse.dart';
 import '../../../features/transfer/presentation/transfer_screen.dart';
 import '../../../models/transfer_session.dart';
 import '../../../services/qr/qr_session_codec.dart';
@@ -78,24 +81,28 @@ class _PreparingTransferScreenState extends ConsumerState<PreparingTransferScree
                   duration: const Duration(milliseconds: 320),
                   child: session == null
                       ? const _StartingUp(key: ValueKey('starting'))
-                      : Container(
+                      : RadarPulse(
                           key: const ValueKey('qr'),
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(24),
-                            boxShadow: [
-                              BoxShadow(
-                                color: scheme.primary.withValues(alpha: 0.15),
-                                blurRadius: 24,
-                                spreadRadius: 4,
+                          color: scheme.primary,
+                          maxDiameter: 300,
+                          child: FlowingGradientSurface(
+                            gradient: AppGradients.primary,
+                            borderRadius: BorderRadius.circular(28),
+                            child: Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(22),
+                                ),
+                                child: QrImageView(
+                                  data: QrSessionCodec.encode(session),
+                                  size: 200,
+                                  backgroundColor: Colors.white,
+                                ),
                               ),
-                            ],
-                          ),
-                          child: QrImageView(
-                            data: QrSessionCodec.encode(session),
-                            size: 220,
-                            backgroundColor: Colors.white,
+                            ),
                           ),
                         ),
                 ),

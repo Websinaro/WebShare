@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'flowing_gradient_surface.dart';
 
-/// The big [ SEND ] / [ RECEIVE ] style buttons on Home.
+/// The big [ SEND ] / [ RECEIVE ] style cards on Home — a flowing
+/// gradient surface (Xender-style sheen) with the icon/label content
+/// layered on top.
 class PrimaryActionButton extends StatefulWidget {
   final IconData icon;
   final String label;
   final String subtitle;
   final VoidCallback onTap;
-  final Color? backgroundColor;
+  final Gradient gradient;
 
   const PrimaryActionButton({
     super.key,
@@ -14,7 +17,7 @@ class PrimaryActionButton extends StatefulWidget {
     required this.label,
     required this.subtitle,
     required this.onTap,
-    this.backgroundColor,
+    required this.gradient,
   });
 
   @override
@@ -28,58 +31,53 @@ class _PrimaryActionButtonState extends State<PrimaryActionButton> {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final bg = widget.backgroundColor ?? scheme.primaryContainer;
-
     return AnimatedScale(
       scale: _pressed ? 0.97 : 1.0,
       duration: const Duration(milliseconds: 120),
       curve: Curves.easeOut,
-      child: Material(
-        color: bg,
-        borderRadius: BorderRadius.circular(24),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(24),
-          onTap: widget.onTap,
-          onHighlightChanged: _setPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 20),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: scheme.surface.withValues(alpha: 0.35),
-                    shape: BoxShape.circle,
+      child: FlowingGradientSurface(
+        gradient: widget.gradient,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: widget.onTap,
+            onHighlightChanged: _setPressed,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 20),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.18),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(widget.icon, size: 28, color: Colors.white),
                   ),
-                  child: Icon(widget.icon, size: 28, color: scheme.onPrimaryContainer),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.label,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: scheme.onPrimaryContainer,
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.label,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        widget.subtitle,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: scheme.onPrimaryContainer.withValues(alpha: 0.72),
+                        const SizedBox(height: 2),
+                        Text(
+                          widget.subtitle,
+                          style: TextStyle(fontSize: 13, color: Colors.white.withValues(alpha: 0.85)),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Icon(Icons.chevron_right_rounded, color: scheme.onPrimaryContainer),
-              ],
+                  const Icon(Icons.chevron_right_rounded, color: Colors.white),
+                ],
+              ),
             ),
           ),
         ),
