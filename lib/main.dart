@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'core/routing/app_router.dart';
-import 'core/theme/app_theme.dart';
+import 'services/transfer_manager.dart';
+import 'screens/home_screen.dart';
 
 void main() {
-  runApp(const ProviderScope(child: WebShareApp()));
+  WidgetsFlutterBinding.ensureInitialized();
+  TransferManager.initForegroundTask();
+  runApp(const WebShareApp());
 }
 
 class WebShareApp extends StatelessWidget {
@@ -13,13 +14,23 @@ class WebShareApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    const seed = Color(0xFF2F6FED);
+    return MaterialApp(
       title: 'WebShare',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light(),
-      darkTheme: AppTheme.dark(),
-      themeMode: ThemeMode.system,
-      routerConfig: appRouter,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: seed),
+        useMaterial3: true,
+        appBarTheme: const AppBarTheme(centerTitle: true),
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: seed,
+          brightness: Brightness.dark,
+        ),
+        useMaterial3: true,
+      ),
+      home: const HomeScreen(),
     );
   }
 }

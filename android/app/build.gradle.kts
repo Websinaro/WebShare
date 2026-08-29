@@ -6,15 +6,13 @@ plugins {
 }
 
 android {
-    namespace = "com.otha.webshare"
-    // 36 = Android 16, so the app compiles against the newest platform APIs.
-    compileSdk = 36
+    namespace = "com.webshare.app"
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = "29.0.14206865"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-        isCoreLibraryDesugaringEnabled = true // needed by some plugins (camera/qr) on API < 26
     }
 
     kotlinOptions {
@@ -22,14 +20,14 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.otha.webshare"
-        // 23 = Android 6.0 (Marshmallow) — oldest supported device.
-        minSdk = 23
-        // 36 = Android 16 — newest supported device.
-        targetSdk = 36
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.webshare.app"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        multiDexEnabled = true
     }
 
     buildTypes {
@@ -39,11 +37,6 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
-}
-
-dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
-    implementation("androidx.annotation:annotation:1.9.1")
 }
 
 flutter {
